@@ -13,7 +13,7 @@
 /**
  * Users and Roles routes
  */
-$router->group(['prefix' => 'v1/'], function () use ($router) {
+$router->group(['prefix' => 'v1/', 'middleware' => 'auth'], function () use ($router) {
     //UserController routes
     $router->post('users', 'Authentication\UserController@store');
     $router->get('users', 'Authentication\UserController@index');
