@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -11,6 +10,22 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+/**
+ * Users and Roles routes
+ */
+$router->group(['prefix' => 'v1/'], function () use ($router) {
+    //UserController routes
+    $router->post('users', 'Authentication\UserController@store');
+    $router->get('users', 'Authentication\UserController@index');
+    $router->get('users/{user}', 'Authentication\UserController@show');
+    $router->put('users/{user}', 'Authentication\UserController@update');
+    $router->patch('users/{user}', 'Authentication\UserController@update');
+    $router->delete('users/{user}', 'Authentication\UserController@destroy');
+    //RoleController routes
+    $router->post('roles', 'Authorization\RoleController@store');
+    $router->get('roles', 'Authorization\RoleController@index');
+    $router->get('roles/{role}', 'Authorization\RoleController@show');
+    $router->put('roles/{role}', 'Authorization\RoleController@update');
+    $router->patch('roles/{role}', 'Authorization\RoleController@update');
+    $router->delete('roles/{role}', 'Authorization\RoleController@destroy');
 });

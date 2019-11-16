@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Hashing\BcryptHasher;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -10,10 +10,12 @@
 | database. Just tell the factory how a default model should look.
 |
 */
-
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
+        'role_id' => $faker->randomElement([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
+        'username' => $faker->userName,
         'email' => $faker->email,
+        'password' => (new BcryptHasher)->make('secret123'),
     ];
 });
